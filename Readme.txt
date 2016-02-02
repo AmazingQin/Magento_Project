@@ -32,5 +32,5 @@ Files Description:
 	
 --category_page.png: snapshot of category page
 --product_page.png: snapshot of product page
---product_with_zoomper.png: snapshot of product page with jQuery plugin zoomper
+--product_with_zoomer.png: snapshot of product page with jQuery plugin zoomper
 
