@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Mysite_Mycategory>
+			<version>0.1.0</version>
+		</Mysite_Mycategory>
+	</modules>
+    <global>
+        <blocks>
+            <mycategory>
+                <class>Mysite_Mycategory_Block</class>
+            </mycategory>
+        </blocks>
+        <models>
+            <mycategory>
+                <class>Mysite_Mycategory_Model</class>
+            </mycategory>
+        </models>
+    </global>
+	<frontend>
+        <routers>
+            <mycategory>
+                <use>standard</use>
+                <args>
+                    <module>Mysite_Mycategory</module>
+                    <frontName>mycategory</frontName>
+                </args>
+            </mycategory>
+        </routers>  
+    </frontend>
+</config>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mysite_Mycategory>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Mysite_Mycategory>
+    </modules>
+</config>

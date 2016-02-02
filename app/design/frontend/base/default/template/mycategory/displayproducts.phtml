@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>MyCategory</title>
+    <?php echo $this->getChildHtml('mycategory_header') ?>
+</head>
+<body>
+	<div id="product_list">
+	    <h1>This is Product Page</h1>
+        <!--knowing the category id, then get all products information and image-->
+		<?php
+			$_categoryId = Mage::registry('cat_id');
+			$products = Mage::getModel('catalog/category')
+			    ->load($_categoryId)
+			    ->getProductCollection();
+			foreach($products as $prod) :
+				$_product = Mage::getModel('catalog/product')->load($prod->getId());
+				$_images = $_product->getMediaGalleryImages();
+		?>
+            <!--showing product price and status  -->
+			<div id="product_info">
+		        <a href="<?php echo $_product->getUrl() ?>"><?php echo $_product->getName() ?></a>
+				<p><?php echo 'Price: '. Mage::helper('core')->currency($_product->getPrice(),true,false); ?></p>
+	            <p>Status: 
+	                <?php 
+	                if ($_product->getStockItem()->getIsInStock()) { echo 'In-Stock';} 
+	                else { echo 'Out-of-Stock'; } ?>
+	            </p>
+	        </div>
+            <!--showing product image with Zoom  -->
+	        <div id="product_img">
+			    <?php if($_images) : ?>
+			        <?php foreach($_images as $_image): ?>
+			        <!--
+        			<img src="<?php //echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize(108,90); ?>" alt="<?php //echo $this->htmlEscape($_image->getLabel());?>" title="<?php //$this->htmlEscape($_image->getLabel());?>" />
+        			-->
+    				<div class="zoom"
+    					data-small="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(400,300); ?>"
+    					data-large="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(800,600); ?>" 
+    					style="width:400px; height:300px;"
+    					title="<?php $this->htmlEscape($_image->getLabel());?>"
+    					>
+    				</div>
+	    			    <script type="text/javascript">
+						    var $j = jQuery.noConflict();
+						    $j(function() {
+						        $j('.zoom').zoomper();
+						    });
+					    </script>
+	                    <?php endforeach;?>
+	        </div>
+	        <?php endif;?>
+    	<?php endforeach;?>
+	</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>MyCategory</title>
+	<style type="text/css">
+	    tab { padding-left: 2em; }
+	    body{background-color: lightblue};
+	</style>
+</head>
+<body>
+	<?php
+		$categories = Mage::getModel('catalog/category')
+	        ->getCollection()
+	        ->addAttributeToSelect('*')
+	// level 2 means the most outside categories are direct subcategories of ROOT category.
+	        ->addAttributeToFilter('level', 2) 
+	        ->addIsActiveFilter();
+	?> 
+	<div id="category_list">
+	 	<h1>This is Category Page</h1>
+	 	<!--First foreach is to show the most outside categories -->	
+		<?php foreach($categories as $category):?>
+	        <!--After clicking any category, indexAction in MyproductController will be triggered  -->
+            <div><a href="<?php echo Mage::getUrl('mycategory/myproduct', array('_catid'=>$category->getId())) ?>">
+            <?php echo $category->getName()?></a>
+            </div>
+            <!--Second foreach is to show all the subcategories of each outside category -->
+		    <?php $cat = $category->getChildrenCategories(); foreach($cat as $subcat):?>
+			    <div><tab></tab>
+			        <a href="<?php echo Mage::getUrl('mycategory/myproduct', array('_catid'=>$subcat->getId())) ?>"><?php echo '--'.$subcat->getName() ?></a>
+			    </div>
+		    <?php endforeach;?>
+        <?php endforeach;?> 	
+	</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+<!--layout for local/Mysite/Mycategory/controllers/IndexController/IndexAction -->
+    <mycategory_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mycategory/displaycategories.phtml</template>
+            </action>
+        </reference>
+    </mycategory_index_index>
+ 
+<!--layout for local/Mysite/Mycategory/controllers/MyproductController/IndexAction --> 
+    <mycategory_myproduct_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>mycategory/displayproducts.phtml</template> 
+            </action>
+            <block type="mycategory/header" name="mycategory_header" as="mycategory_header">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>lib/ccard.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addItem"><type>skin_js</type><name>js/jquery-1.12.0.min.js</name></action>
+                <action method="addItem"><type>skin_js</type><name>js/zoomper.jquery.js</name></action>
+            </block>
+            <action method="insert">
+                <name>catalog_product_gallery</name>
+            </action>
+        </reference>
+    </mycategory_myproduct_index>
+</layout>
